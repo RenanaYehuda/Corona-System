@@ -16,8 +16,9 @@ router.get('/', async (req, res) => {
 // Getting One
 router.get('/:id', async (req, res) => {
   try {
-    console.log(req.params.id)
+
     const user = await Users.findById(req.params.id)
+    console.log('0')
     res.status(200).json(user)
   } catch (err) {
     res.status(500).json({ message: err.message })
