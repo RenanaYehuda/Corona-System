@@ -17,8 +17,9 @@ router.get('/', async (req, res) => {
 // Getting One
 router.get('/:id', async (req, res) => {
     try {
-        const corona = await Corona.findById(req.params.id)
+        const corona = await Corona.find({ "ID": req.params.id })
         res.status(200).json(corona)
+
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
