@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const coronaSchema = new mongoose.Schema({
-    ID: { type: Number, required: true },
+    ID: { type: Number, required: true, unique: true },
     dateAndMaker: [{
-        date: { type: Date, default: Date.now },
+        date: { type: Date },
         maker: { type: String },
     }],
-    datePositiveRes: { type: Date, default: Date.now },
-    dateRecovery: { type: Date, default: Date.now }
+    datePositiveRes: { type: Date },
+    dateRecovery: { type: Date }
 });
 
 
