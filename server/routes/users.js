@@ -5,8 +5,9 @@ const Users = require('../models/users');
 
 // Getting all
 router.get('/', async (req, res) => {
+  let filter = { isActive: 'true' };
   try {
-    const users = await Users.find()
+    const users = await Users.find(filter)
     res.json(users)
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -50,7 +51,8 @@ router.put('/:id', async (req, res) => {
 // Deleting One
 router.delete('/:id', async (req, res) => {
   try {
-    const user = await Users.remove({ _id: req.params.id })
+    const user = await Users.updateOne({ _id: req.params.id }, { isActive: false })
+    //const user = await Users.remove({ _id: req.params.id })
     res.status(200).json({ message: `User _id:${user} Deleted` })
   } catch (err) {
     res.status(500).json({ message: err.message })
