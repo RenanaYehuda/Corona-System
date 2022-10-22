@@ -36,7 +36,7 @@ const CreateUser = () => {
     return (
         <Box>
             <Dialog open={openCorona} onClose={handleCloseUpdate} maxWidth='xl'>
-                <CreateCorona />
+                <CreateCorona id={ID} />
             </Dialog>
             <Typography>משתמש חדש</Typography>
             <Stack spacing={2}>

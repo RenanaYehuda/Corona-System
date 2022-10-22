@@ -5,9 +5,8 @@ import { Button, Typography, TextField, Box, Stack, Alert } from '@mui/material'
 
 import { addCorona } from '../api/coronaApi';
 
-const CreateCorona = () => {
+const CreateCorona = ({ id }) => {
 
-    const [ID, setID] = React.useState("");
     const [dateOfVaccination, setDateOfVaccination] = React.useState("");
     const [maker, setMaker] = React.useState("");
     const [datePositiveRes, setDatePositiveRes] = React.useState("");
@@ -22,13 +21,13 @@ const CreateCorona = () => {
             <Stack spacing={2}>
                 {newCoronaMutation.isSuccess && <Alert severity="success">פרטי קורונה נוספו בהצלחה!</Alert>}
                 {newCoronaMutation.isError && <Alert severity="error">שגיאה בהוספת פרטי קורונה!</Alert>}
-                <TextField required value={ID} onChange={(e) => setID(e.target.value)} label="תעודת זהות" variant="outlined" />
+                <TextField required defaultValue={id} InputProps={{ readOnly: true, }} label="תעודת זהות" variant="outlined" />
                 <TextField placeholder="yyyy-mm-dd" value={dateOfVaccination} onChange={(e) => setDateOfVaccination(e.target.value)} label="תאריך קבלת חיסון" variant="outlined" />
                 <TextField placeholder="פייזר/מודרנה/אסטרהזניקה/נובהווקס" value={maker} onChange={(e) => setMaker(e.target.value)} label="יצרן הקורונה" variant="outlined" />
                 <TextField placeholder="yyyy-mm-dd" value={datePositiveRes} onChange={(e) => setDatePositiveRes(e.target.value)} label="תאריך קבלת תוצאה חיובית" variant="outlined" />
                 <Button variant='contained' onClick={() => {
                     newCoronaMutation.mutate({
-                        ID,
+                        ID: id,
                         dateAndMaker: [{ date: dateOfVaccination, maker: maker }],
                         datePositiveRes
                     })
