@@ -1,10 +1,15 @@
-import { Button, Typography, TextField, Box, Stack, Alert } from '@mui/material'
 import React from 'react'
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+
+import { Button, Typography, TextField, Box, Stack, Alert, Dialog } from '@mui/material'
 
 import { addUser } from '../api/usersApi';
+import CreateCorona from './CreateCorona';
 
 const CreateUser = () => {
+
+    const [openCorona, setOpenCorona] = React.useState(false);
 
     const [fullName, setFullName] = React.useState("");
     const [ID, setID] = React.useState("");
@@ -13,13 +18,26 @@ const CreateUser = () => {
     const [phone, setPhone] = React.useState("");
     const [mobilePhone, setMobilePhone] = React.useState("");
 
+    const handleCloseUpdate = () => {
+        setOpenCorona(false);
+    };
 
     const newUserMutation = useMutation(newUserObj => {
         return addUser(newUserObj)
+    }, {
+        onSuccess: () => {
+            setOpenCorona(true)
+        },
     })
+
+
+    let navigate = useNavigate()
 
     return (
         <Box>
+            <Dialog open={openCorona} onClose={handleCloseUpdate} maxWidth='xl'>
+                <CreateCorona />
+            </Dialog>
             <Typography>משתמש חדש</Typography>
             <Stack spacing={2}>
                 {newUserMutation.isSuccess && <Alert severity="success">משתמש נוסף בהצלחה!</Alert>}
@@ -30,6 +48,7 @@ const CreateUser = () => {
                 <TextField required placeholder="yyyy-mm-dd" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} label="תאריך לידה" variant="outlined" />
                 <TextField required value={phone} onChange={(e) => setPhone(e.target.value)} label="טלפון" variant="outlined" />
                 <TextField required value={mobilePhone} onChange={(e) => setMobilePhone(e.target.value)} label="טלפון נייד" variant="outlined" />
+                <Button variant='text' onClick={() => navigate(`/create-corona`)}>הוספת פרטי קורונה</Button>
                 <Button variant='contained' fullWidth onClick={() => {
                     newUserMutation.mutate({
                         fullName,
@@ -39,6 +58,7 @@ const CreateUser = () => {
                         phone,
                         mobilePhone
                     })
+
                 }}>הוספת משתמש</Button>
             </Stack>
         </Box>

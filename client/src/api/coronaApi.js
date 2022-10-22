@@ -20,6 +20,7 @@ export const getCorona = async (id) => {
 }
 
 export const addCorona = async (user) => {
+    console.log(user)
     return await usersApi.post('/corona', user)
 }
 
