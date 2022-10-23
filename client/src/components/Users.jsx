@@ -55,7 +55,7 @@ const Users = () => {
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell>
-                                    <img width={100} alt="פרופיל" src={user.image} />
+                                    <img width={100} alt="פרופיל" src={`http://localhost:8080/images/${user.image}`} />
                                 </TableCell>
                                 <TableCell align="left">
                                     <Button onClick={() => navigate(`/user/${user._id}`)}>

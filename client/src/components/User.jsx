@@ -25,7 +25,7 @@ const User = () => {
     };
 
     const updateMutation = useMutation(updateObj => {
-        console.log(updateObj.image)
+        console.log(updateObj)
         return updateUser(updateObj)
     }, {
         onSuccess: () => {
@@ -62,7 +62,7 @@ const User = () => {
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, Phone: e.target.value })} />
                     <TextField value={updateUserObj.mobilePhone} autoFocus margin="dense" id="nameUser" label="טלפון נייד" type="string" fullWidth
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, mobilePhone: e.target.value })} />
-                    <input type="file" onChange={(e) => setUpdateUserObj({ ...updateUserObj, image: URL.createObjectURL(e.target.files[0]) })} />
+                    <input type="file" onChange={(e) => setUpdateUserObj({ ...updateUserObj, image: e.target.files[0].name })} />
 
                 </DialogContent>
                 <DialogActions>
@@ -89,7 +89,8 @@ const User = () => {
                     </Stack>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <img width={300} alt="פרופיל" src={data.image} />
+                    <img width={300} alt="פרופיל" src={`http://localhost:8080/images/${data.image}`}
+                    />
                 </Grid>
             </Grid>
         </Box>

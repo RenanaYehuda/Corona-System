@@ -26,6 +26,38 @@ const CreateCorona = ({ id }) => {
         return addCorona(newCoronaObj)
     })
 
+    const getDateOfVac = () => {
+        if (dateOfVaccination && dateOfVaccination1 && dateOfVaccination2 && dateOfVaccination3) {
+            return [
+                { date: dateOfVaccination, maker: maker },
+                { date: dateOfVaccination1, maker: maker1 },
+                { date: dateOfVaccination2, maker: maker2 },
+                { date: dateOfVaccination3, maker: maker3 }
+            ]
+        }
+        else if (dateOfVaccination && dateOfVaccination1 && dateOfVaccination2) {
+            return [
+                { date: dateOfVaccination, maker: maker },
+                { date: dateOfVaccination1, maker: maker1 },
+                { date: dateOfVaccination2, maker: maker2 },
+            ]
+        }
+        else if (dateOfVaccination && dateOfVaccination1) {
+            return [
+                { date: dateOfVaccination, maker: maker },
+                { date: dateOfVaccination1, maker: maker1 },
+            ]
+        }
+        else if (dateOfVaccination) {
+            return [
+                { date: dateOfVaccination, maker: maker }
+            ]
+        }
+        else {
+            return []
+        }
+
+    }
     return (
         <Box>
             <Typography>פרטי קורונה</Typography>
@@ -50,12 +82,7 @@ const CreateCorona = ({ id }) => {
                 <Button variant='contained' onClick={() => {
                     newCoronaMutation.mutate({
                         ID: id,
-                        dateAndMaker: [
-                            { date: dateOfVaccination, maker: maker },
-                            { date: dateOfVaccination1, maker: maker1 },
-                            { date: dateOfVaccination2, maker: maker2 },
-                            { date: dateOfVaccination3, maker: maker3 }
-                        ],
+                        dateAndMaker: getDateOfVac(),
                         datePositiveRes: datePositiveRes,
                         dateRecovery: dateRecovery
                     })
