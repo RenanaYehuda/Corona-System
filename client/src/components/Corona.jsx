@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
-import { Typography, Stack, Button, Box } from '@mui/material';
+import { Typography, Stack, Box } from '@mui/material';
 
 import { getCorona } from '../api/coronaApi'
 
@@ -35,7 +35,6 @@ const Corona = () => {
             )}
             <Typography variant='h5'>תאריך קבלת תוצאה חיובית: {data?.datePositiveRes}</Typography>
             <Typography variant='h5'>תאריך החלמה: {data?.dateRecovery}</Typography>
-            <Button>עדכון פרטי קורונה</Button>
         </Stack>
 
 

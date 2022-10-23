@@ -32,6 +32,7 @@ router.post('/', async (req, res) => {
         const user = await Users.find({ "ID": req.body.ID })
         console.log(user)
         if (user) {
+            console.log(req.body)
             const corona = new Corona(req.body)
             const newCorona = await corona.save()
             res.status(201).json(newCorona)

@@ -25,6 +25,7 @@ const User = () => {
     };
 
     const updateMutation = useMutation(updateObj => {
+        console.log(updateObj.image)
         return updateUser(updateObj)
     }, {
         onSuccess: () => {
@@ -55,16 +56,14 @@ const User = () => {
                     {updateMutation.isError && <Alert severity="error">שגיאה בעדכון משתמש!</Alert>}
                     <TextField value={updateUserObj.fullName} autoFocus margin="dense" id="nameUser" label="שם פרטי ומשפחה" type="string" fullWidth
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, fullName: e.target.value })} />
-                    <TextField value={updateUserObj.ID} autoFocus margin="dense" id="nameUser" label="תעודת זהות" type="string" fullWidth
-                        variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, ID: e.target.value })} />
                     <TextField value={updateUserObj.address} autoFocus margin="dense" id="nameUser" label="כתובת" type="string" fullWidth
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, address: e.target.value })} />
-                    <TextField value={updateUserObj.birthDate} autoFocus margin="dense" id="nameUser" label="תאריך לידה" type="string" fullWidth
-                        variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, birthDate: e.target.value })} />
                     <TextField value={updateUserObj.phone} autoFocus margin="dense" id="nameUser" label="טלפון" type="string" fullWidth
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, Phone: e.target.value })} />
                     <TextField value={updateUserObj.mobilePhone} autoFocus margin="dense" id="nameUser" label="טלפון נייד" type="string" fullWidth
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, mobilePhone: e.target.value })} />
+                    <input type="file" onChange={(e) => setUpdateUserObj({ ...updateUserObj, image: URL.createObjectURL(e.target.files[0]) })} />
+
                 </DialogContent>
                 <DialogActions>
                     <Button variant='contained' size='medium' fullWidth onClick={() => {
@@ -72,22 +71,26 @@ const User = () => {
                     }}>עדכון</Button>
                 </DialogActions>
             </Dialog>
+            <Grid container spacing={1}>
+                <Grid item xs={12} md={6}>
+                    <Stack direction='column' spacing={1}>
+                        <Typography variant='h3' component='h1'>{data.fullName}</Typography>
+                        <Typography variant='h5'>תז: {data.ID}</Typography>
+                        <Typography variant='h5'>כתובת: {data.address}</Typography>
+                        <Typography variant='h5'>תאריך לידה: {data.birthDate}</Typography>
+                        <Typography variant='h5'>טלפון: {data.phone}</Typography>
+                        <Typography variant='h5'>טלפון נייד: {data.mobilePhone}</Typography>
 
-            <Grid item xs={12} md={6}>
-                <Stack direction='column' spacing={1}>
-                    <Typography variant='h3' component='h1'>{data.fullName}</Typography>
-                    <Typography variant='h5'>תז: {data.ID}</Typography>
-                    <Typography variant='h5'>כתובת: {data.address}</Typography>
-                    <Typography variant='h5'>תאריך לידה: {data.birthDate}</Typography>
-                    <Typography variant='h5'>טלפון: {data.phone}</Typography>
-                    <Typography variant='h5'>טלפון נייד: {data.mobilePhone}</Typography>
-                    <Button onClick={() => navigate(`/corona/${data.ID}`)}>פרטי קורונה</Button>
-                    <Button onClick={() => {
-                        setUpdateUserObj(data)
-                        setOpenUpdate(true)
-                    }}>עדכון פרטים אישיים</Button>
-                </Stack>
-
+                        <Button onClick={() => navigate(`/corona/${data.ID}`)}>פרטי קורונה</Button>
+                        <Button onClick={() => {
+                            setUpdateUserObj(data)
+                            setOpenUpdate(true)
+                        }}>עדכון פרטים אישיים</Button>
+                    </Stack>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <img width={300} alt="פרופיל" src={data.image} />
+                </Grid>
             </Grid>
         </Box>
 
