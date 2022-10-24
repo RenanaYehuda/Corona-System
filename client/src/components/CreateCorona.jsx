@@ -24,37 +24,40 @@ const CreateCorona = ({ id }) => {
 
     const newCoronaMutation = useMutation(newCoronaObj => {
         return addCorona(newCoronaObj)
+    }, {
+        onSuccess: () => {
+            window.location.replace('/')
+        },
     })
 
     const getDateOfVac = () => {
-        if (dateOfVaccination && dateOfVaccination1 && dateOfVaccination2 && dateOfVaccination3) {
+        if (dateOfVaccination1 && dateOfVaccination2 && dateOfVaccination3) {
             return [
+
                 { date: dateOfVaccination, maker: maker },
                 { date: dateOfVaccination1, maker: maker1 },
                 { date: dateOfVaccination2, maker: maker2 },
                 { date: dateOfVaccination3, maker: maker3 }
             ]
         }
-        else if (dateOfVaccination && dateOfVaccination1 && dateOfVaccination2) {
+        else if (dateOfVaccination1 && dateOfVaccination2) {
             return [
+
                 { date: dateOfVaccination, maker: maker },
                 { date: dateOfVaccination1, maker: maker1 },
                 { date: dateOfVaccination2, maker: maker2 },
             ]
         }
-        else if (dateOfVaccination && dateOfVaccination1) {
+        else if (dateOfVaccination1) {
             return [
+
                 { date: dateOfVaccination, maker: maker },
                 { date: dateOfVaccination1, maker: maker1 },
             ]
         }
-        else if (dateOfVaccination) {
-            return [
-                { date: dateOfVaccination, maker: maker }
-            ]
-        }
+
         else {
-            return []
+            return [{ date: dateOfVaccination, maker: maker }]
         }
 
     }
@@ -66,8 +69,8 @@ const CreateCorona = ({ id }) => {
                 {newCoronaMutation.isError && <Alert severity="error">שגיאה בהוספת פרטי קורונה!</Alert>}
                 <TextField required defaultValue={id} InputProps={{ readOnly: true, }} label="תעודת זהות" variant="outlined" />
                 <Typography>חיסון ראשון</Typography>
-                <TextField placeholder="yyyy-mm-dd" value={dateOfVaccination} onChange={(e) => setDateOfVaccination(e.target.value)} label="תאריך קבלת חיסון" variant="outlined" />
-                <TextField placeholder="פייזר/מודרנה/אסטרהזניקה/נובהווקס" value={maker} onChange={(e) => setMaker(e.target.value)} label="יצרן הקורונה" variant="outlined" />
+                <TextField required placeholder="yyyy-mm-dd" value={dateOfVaccination} onChange={(e) => setDateOfVaccination(e.target.value)} label="תאריך קבלת חיסון" variant="outlined" />
+                <TextField required placeholder="פייזר/מודרנה/אסטרהזניקה/נובהווקס" value={maker} onChange={(e) => setMaker(e.target.value)} label="יצרן הקורונה" variant="outlined" />
                 <Typography>חיסון שני</Typography>
                 <TextField placeholder="yyyy-mm-dd" value={dateOfVaccination1} onChange={(e) => setDateOfVaccination1(e.target.value)} label="תאריך קבלת חיסון" variant="outlined" />
                 <TextField placeholder="פייזר/מודרנה/אסטרהזניקה/נובהווקס" value={maker1} onChange={(e) => setMaker1(e.target.value)} label="יצרן הקורונה" variant="outlined" />

@@ -8,6 +8,7 @@ import { Typography, Stack, Grid, Alert, TextField, Button, Box, DialogActions, 
 
 import { getUser, updateUser } from '../api/usersApi';
 
+import { formatDateIL } from '../help';
 
 const User = () => {
 
@@ -62,8 +63,6 @@ const User = () => {
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, Phone: e.target.value })} />
                     <TextField value={updateUserObj.mobilePhone} autoFocus margin="dense" id="nameUser" label="טלפון נייד" type="string" fullWidth
                         variant="standard" onChange={(e) => setUpdateUserObj({ ...updateUserObj, mobilePhone: e.target.value })} />
-                    <input type="file" onChange={(e) => setUpdateUserObj({ ...updateUserObj, image: e.target.files[0].name })} />
-
                 </DialogContent>
                 <DialogActions>
                     <Button variant='contained' size='medium' fullWidth onClick={() => {
@@ -77,7 +76,7 @@ const User = () => {
                         <Typography variant='h3' component='h1'>{data.fullName}</Typography>
                         <Typography variant='h5'>תז: {data.ID}</Typography>
                         <Typography variant='h5'>כתובת: {data.address}</Typography>
-                        <Typography variant='h5'>תאריך לידה: {data.birthDate}</Typography>
+                        <Typography variant='h5'>תאריך לידה: {formatDateIL(data.birthDate)}</Typography>
                         <Typography variant='h5'>טלפון: {data.phone}</Typography>
                         <Typography variant='h5'>טלפון נייד: {data.mobilePhone}</Typography>
 
@@ -87,10 +86,6 @@ const User = () => {
                             setOpenUpdate(true)
                         }}>עדכון פרטים אישיים</Button>
                     </Stack>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <img width={300} alt="פרופיל" src={`http://localhost:8080/images/${data.image}`}
-                    />
                 </Grid>
             </Grid>
         </Box>

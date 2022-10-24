@@ -6,6 +6,8 @@ import { Typography, Stack, Box } from '@mui/material';
 
 import { getCorona } from '../api/coronaApi'
 
+import { formatDateIL } from '../help';
+
 const Corona = () => {
 
     const { id } = useParams();
@@ -26,15 +28,15 @@ const Corona = () => {
 
         <Stack direction='column' spacing={1}>
             <Typography variant='h4'>נתוני קורונה</Typography>
-            <Typography variant='h4'>חיסוני קורונה</Typography>
+            <Typography variant='h5'>חיסוני קורונה</Typography>
             {data && data.dateAndMaker?.map((dateMake, i) =>
                 <Box key={i}>
-                    <Typography variant='h5'>תאריך חיסון: {dateMake.date}</Typography>
+                    <Typography variant='h5'>תאריך חיסון{i + 1}: {formatDateIL(dateMake.date)}</Typography>
                     <Typography variant='h5'>שם היצרן: {dateMake.maker}</Typography>
                 </Box>
             )}
-            <Typography variant='h5'>תאריך קבלת תוצאה חיובית: {data?.datePositiveRes}</Typography>
-            <Typography variant='h5'>תאריך החלמה: {data?.dateRecovery}</Typography>
+            {data?.datePositiveRes && <Typography variant='h5'>תאריך קבלת תוצאה חיובית: {formatDateIL(data?.datePositiveRes)}</Typography>}
+            {data?.dateRecovery && <Typography variant='h5'>תאריך החלמה: {formatDateIL(data?.dateRecovery)}</Typography>}
         </Stack>
 
 
