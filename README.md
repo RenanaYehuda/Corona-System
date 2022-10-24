@@ -16,6 +16,8 @@ All users
 
 Det users
 ![image](https://user-images.githubusercontent.com/66746638/197650693-7974da95-95fa-489b-929e-402b1582942c.png)
+Det corona
+![image](https://user-images.githubusercontent.com/66746638/197650792-e70afb34-466b-4f37-a513-4e2f66e47d2d.png)
 
 Add user
 ![image](https://user-images.githubusercontent.com/66746638/197650615-bd30d47a-e2dc-4192-a682-6d37afc0d5a3.png)
