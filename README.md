@@ -1,46 +1,13 @@
 # Corona-System
 
-צד שרת:
+server:
 npx express-generator
 
-צד לקוח:
+client:
 npx create-react-app
 npm i @mui/material
 npm i @mui/icons-material
 
-בסיס הנתונים:
+DB:
 npm i mongoose
-
-כל המשתמשים
-
- 
-
-הצגת פרטי משתמש
-
- 
-
-הצגת פרטי קורונה
-
- 
-
-
-
-
-
-עדכון משתמש
-
- 
-
-יצירת משתמש
-
- 
-יצירת פרטי קורונה
-
-
- 
-
-
-
-
-
 
